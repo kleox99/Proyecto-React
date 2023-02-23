@@ -1,10 +1,12 @@
-import { Button } from "./components/Puto";
-import { Icons } from "./components/Icons/Icons";
+import { NavBar } from "./components/NavBar/NavBar";
+import { ItemListContainer } from "./components/ItemListContainer/ItemListContainer";
 
 function App() {
   return (
-    <div>
-    </div>
+    <>
+      <NavBar/> 
+      <ItemListContainer greeting={"Hola k ase, corrige o k ase 🦙🔥"} />
+    </>
   );
 }
 

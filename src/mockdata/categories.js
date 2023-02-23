@@ -1,0 +1,1 @@
+export const categories = ["Inicio", "Productos", "Nosotros",  "Contacto", "Preguntas Frecuentes"]
