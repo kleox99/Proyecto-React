@@ -4,6 +4,7 @@ import { ItemListElement } from '../ItemListElement/ItemListElement';
 
 const ItemListContainer = () => {
     const {id} = useParams()
+    console.log("🚀 ~ file: ItemListContainer.js:7 ~ ItemListContainer ~ id:", id)
     
     const [pokemonList, setPokemonList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +26,7 @@ const ItemListContainer = () => {
 
     return (
         <div>
-            {pokemonList.map(pokemon => <ItemListElement id={id !== undefined ? pokemon.pokemon.name : pokemon.name} key={id !== undefined ? pokemon.pokemon.name : pokemon.name}/>)}
+            {pokemonList.map(pokemon => <ItemListElement id={id !== undefined ? pokemon?.pokemon?.name : pokemon?.name} key={id !== undefined ? pokemon?.pokemon?.name : pokemon?.name}/>)}
         </div>
     )
 }
