@@ -1,34 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { useItemList } from '../../hooks/useItemList';
 import { ItemListElement } from '../ItemListElement/ItemListElement';
 
-const ItemListContainer = () => {
-    const {id} = useParams()
-    console.log("🚀 ~ file: ItemListContainer.js:7 ~ ItemListContainer ~ id:", id)
-    
-    const [pokemonList, setPokemonList] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    
-    useEffect(() => {
-        setIsLoading(true);
-        const url = id !== undefined ? `https://pokeapi.co/api/v2/type/${id}` : "https://pokeapi.co/api/v2/pokemon";
-        fetch(url)
-            .then((res) => res.json())
-            .then((res) => {
-                setPokemonList(id !== undefined ? res.pokemon : res.results)
-                setIsLoading(false)
-            })
-    }, [id])   
+export const ItemListContainer = () => {
+    const itemList = useItemList();
+    const groupByCategory = (items) => {
+        return items.reduce((group, item) => {
+            if (item.categoryid in group) {
+                group[item.categoryid].push(item);
+            } else {
+                group[item.categoryid] = [item]
+            }
 
-    if (isLoading || pokemonList?.length === 0) {
-        return <div>Buscando en la pokedex...</div>
-  }
+            return group;
+        }, {}) 
+    }
 
-    return (
+    const itemGroups = itemList ? groupByCategory(itemList) : []
+
+    return(
         <div>
-            {pokemonList.map(pokemon => <ItemListElement id={id !== undefined ? pokemon?.pokemon?.name : pokemon?.name} key={id !== undefined ? pokemon?.pokemon?.name : pokemon?.name}/>)}
+
+            
         </div>
     )
 }
-
-export {ItemListContainer}
