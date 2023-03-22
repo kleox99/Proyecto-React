@@ -1,6 +1,7 @@
 import React from 'react'
 import { useItemList } from '../../hooks/useItemList';
 import { CategoryList } from '../CategoryList/CategoryList';
+import { ListContainer } from './ListContainerStyle';
 
 export const ItemListContainer = () => {
     const itemList = useItemList();
@@ -18,16 +19,12 @@ export const ItemListContainer = () => {
     }
 
     const itemGroups = itemList ? groupByCategory(itemList) : []
-    console.log("🚀 ~ file: ItemListContainer.js:22 ~ ItemListContainer ~ itemGroups:", itemGroups)
 
     const categoriesList = Object.entries(itemGroups);
-    console.log("🚀 ~ file: ItemListContainer.js:25 ~ ItemListContainer ~ categoriesList:", categoriesList)
     
-
     return(
-        <div>
-
-            {categoriesList.map(categoryList => <CategoryList categoryName={categoryList[0]}  itemList={categoryList[1]} />)}    
-        </div>
+        <ListContainer>
+            {categoriesList.map(categoryList => <CategoryList key={categoryList[0]} categoryName={categoryList[0]} itemList={categoryList[1]} />)}    
+        </ListContainer>
     )
 }
