@@ -1,10 +1,14 @@
 import React from 'react'
+import { useParams } from 'react-router-dom';
 import { useItemList } from '../../hooks/useItemList';
 import { CategoryList } from '../CategoryList/CategoryList';
 import { ListContainer } from './ListContainerStyle';
 
 export const ItemListContainer = () => {
     const itemList = useItemList();
+
+    const {id} = useParams()
+    console.log("🚀 ~ file: ItemListContainer.js:11 ~ ItemListContainer ~ id:", id)
 
     const groupByCategory = (items) => {
         return items.reduce((group, item) => {
@@ -18,13 +22,18 @@ export const ItemListContainer = () => {
         }, {}) 
     }
 
-    const itemGroups = itemList ? groupByCategory(itemList) : []
+    const itemGroups = itemList ? groupByCategory(itemList) : {}
+    console.log("🚀 ~ file: ItemListContainer.js:25 ~ ItemListContainer ~ itemGroups:", itemGroups)
 
     const categoriesList = Object.entries(itemGroups);
-    
+
     return(
         <ListContainer>
-            {categoriesList.map(categoryList => <CategoryList key={categoryList[0]} categoryName={categoryList[0]} itemList={categoryList[1]} />)}    
+            {id && itemGroups?.[id] ?
+                <CategoryList key={id} categoryName={id} itemList={itemGroups?.[id]}/>
+            :
+                categoriesList.map(categoryList => <CategoryList key={categoryList[0]} categoryName={categoryList[0]} itemList={categoryList[1]} />)
+            }    
         </ListContainer>
     )
 }

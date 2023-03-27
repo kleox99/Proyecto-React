@@ -14,7 +14,7 @@ export const useItemDetail = (id) => {
                 setItem({ id: snapshot.id, ...snapshot.data()});
             };
         });
-    })
+    }, [])
 
     return item;
 }

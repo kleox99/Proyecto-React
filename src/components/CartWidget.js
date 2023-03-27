@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Notification } from './Notification/Notification';
 import {Icons} from './Icons/Icons'
+import { Link } from 'react-router-dom';
+import { CartContext } from '../context/CartContex';
 
 
-export const CartWidget = ({number}) => {
+export const CartWidget = () => {
+
+    const {cartItems} = useContext(CartContext) 
+    const number = cartItems.length
+
     return (
-        <Notification number={number}>
-            <Icons type={"cart"}/>
-        </Notification>
+        <Link to={"/cart"}>
+            <Notification number={number}>
+                <Icons type={"cart"}/>
+            </Notification>
+        </Link>
     )
 }

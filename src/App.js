@@ -4,6 +4,9 @@ import { ItemListContainer } from "./components/ItemListContainer/ItemListContai
 import { ItemDetailContainer } from './components/ItemDetailContainer/ItemDetailContainer';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { CartProvider } from './context/CartContex';
+import { Cart } from './components/Cart/Cart';
+import { Checkout } from './components/Checkout/Checkout';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,14 +27,18 @@ const app = initializeApp(firebaseConfig);
 
 function App() {
   return (
-    <BrowserRouter>
-      <NavBar/>
-      <Routes>
-        <Route exact path='/' element={<ItemListContainer />} />
-        <Route exact path='/category/:id' element={<ItemListContainer/>} />
-        <Route exact path='/item/:id' element={<ItemDetailContainer />} />
-      </Routes>   
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <NavBar/>
+        <Routes>
+          <Route exact path='/' element={<ItemListContainer />} />
+          <Route exact path='/category/:id' element={<ItemListContainer/>} />
+          <Route exact path='/item/:id' element={<ItemDetailContainer />} />
+          <Route exact path='/cart' element={<Cart/>} />
+          <Route exact path='/checkout' element={<Checkout/>} />
+        </Routes>   
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 

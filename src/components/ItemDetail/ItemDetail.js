@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CartContext } from '../../context/CartContex';
 import {Coin} from '../Icons/Coin'
+import { ItemQuantitySelector } from '../ItemQuantitySelector/ItemQuantitySelector';
+
 
 export const ItemDetail = ({item}) => {
+
+    const {addItemToCart} =  useContext(CartContext)
+
+    const addItem = (quantity) => {
+        if (quantity) {
+            const newItem = {quantity, ...item} 
+            addItemToCart(newItem)
+        }
+    }
+
     return (
         <div>
             <section>
@@ -12,6 +25,7 @@ export const ItemDetail = ({item}) => {
                 <span>{item.description}</span>
                 <span>{item.stats}</span>
                 <span><Coin/>{item.price}</span>
+                <ItemQuantitySelector onAdd={addItem}/>
             </div>
         </div>
     )
