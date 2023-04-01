@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../../context/CartContex';
 import { Coin } from '../Icons/Coin';
+import { CheckoutForm } from './CheckoutForm';
 import { CheckoutItem } from './CheckoutItem';
 
 export const Checkout = () => {
@@ -14,8 +15,10 @@ export const Checkout = () => {
 
     return (
         <div>
+
             {cartItems.map(item => <CheckoutItem key={item.id} item={item}/>)}
             <span>Total: {total}<Coin/></span>
+            <CheckoutForm/>
         </div>
     )
 }

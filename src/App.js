@@ -7,6 +7,8 @@ import { initializeApp } from "firebase/app";
 import { CartProvider } from './context/CartContex';
 import { Cart } from './components/Cart/Cart';
 import { Checkout } from './components/Checkout/Checkout';
+import { CheckoutForm } from './components/Checkout/CheckoutForm';
+import { Order } from './components/Checkout/Order';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,7 +25,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
           <Route exact path='/item/:id' element={<ItemDetailContainer />} />
           <Route exact path='/cart' element={<Cart/>} />
           <Route exact path='/checkout' element={<Checkout/>} />
+          <Route exact path='/checkout' element={<CheckoutForm/>} />
+          <Route exact path='/checkout' element={<Order/>} />
         </Routes>   
       </BrowserRouter>
     </CartProvider>
