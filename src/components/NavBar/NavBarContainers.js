@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = styled.header`
@@ -10,4 +11,12 @@ const Nav = styled.nav`
     display: flex;
     gap: 8px;
 ` 
-export {Header, Nav} 
+
+const StyledLink = styled(Link)`
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+`
+
+export {Header, Nav, StyledLink} 

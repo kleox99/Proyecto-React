@@ -1,34 +1,63 @@
-import React, { useRef, useState } from 'react'
-import { useCheckout } from '../../hooks/useCheckout';
-import { Order } from './Order';
+import React, { useRef, useState } from 'react' 
+import { sendOrder } from './sendOrder';
+import { useNavigate } from "react-router-dom";
 
-export const CheckoutForm = () => {
+export const CheckoutForm = ({order}) => {
 
-    const [showPaymentOnline, setShowPaymentOnline] = useState()
+    const navigate = useNavigate()
 
+    const [showPaymentOnline, setShowPaymentOnline] = useState(false)
+
+    const [inputValues, setInputValues] = useState({
+        nombre: "",
+        direccion: "",
+        telefono: "",
+        email: "",
+        titularTarjeta: "",
+        tarjeta: "",
+        pin: "",
+    });
+    
     const formRef = useRef()
+    
+    const onChange =  (event, type) => {
+        setInputValues((previusValues) => {
+            return {
+                ...previusValues, 
+                [type]:event.target.value,
+            }
+        });
+    }
+    
+    const onSubmit = (event) => {
+        event.preventDefault()
+        const values = {...inputValues, pagoOnline: showPaymentOnline}
+        sendOrder(order, values, onSuccess)
+    }
 
-    useCheckout()
+    const onSuccess = (order) => {
+        navigate("/order", { state: { order } })
+    }
 
     return (
         <div>
             <h2>Ingrese sus datos para procesar la orden</h2>
-            <form ref={formRef}>
+            <form ref={formRef} onSubmit={onSubmit}>
                 <label>
                     Nombre y apellido:
-                    <input type="text" />
+                    <input onChange={(event) => onChange(event, "nombre")} value={inputValues.nombre} type="text" />
                 </label>
                 <label>
                     Direccion:
-                    <input type="text" />
+                    <input onChange={(event) => onChange(event, "direccion")} value={inputValues.direccion} type="text" />
                 </label>
                 <label>
                     Teléfono:
-                    <input type="tel" />
+                    <input onChange={(event) => onChange(event, "telefono")} value={inputValues.telefono} type="tel" />
                 </label>
                 <label>
                     Email:
-                    <input type="text" />
+                    <input onChange={(event) => onChange(event, "email")} value={inputValues.email} type="text" />
                 </label>
                 <label>
                     Forma de pago: 
@@ -41,19 +70,19 @@ export const CheckoutForm = () => {
                     <div>
                         <label>
                             Nombre del titular:
-                            <input type="text" minlength="16" maxlength="16" />
+                            <input onChange={(event) => onChange(event, "titularTarjeta")} value={inputValues.titularTarjeta} type="text"/>
                         </label>
                         <label>
                             Nº de tarjeta:
-                            <input type="text" minlength="16" maxlength="16" />
+                            <input onChange={(event) => onChange(event, "tarjeta")} value={inputValues.tarjeta} type="text" minLength="16" maxLength="16"/>
                         </label>
                         <label>
                             Pin:
-                            <input type="text" minlength="3" maxlength="3" />
+                            <input onChange={(event) => onChange(event, "pin")} value={inputValues.pin} type="text" minLength="3" maxLength="3" />
                         </label>
                     </div>
                 }
-                <input type="submit" value="Ir a pagar" />
+                <input type="submit" value="Procesar pago" />
             </form>
         </div>
     )

@@ -7,8 +7,7 @@ import { initializeApp } from "firebase/app";
 import { CartProvider } from './context/CartContex';
 import { Cart } from './components/Cart/Cart';
 import { Checkout } from './components/Checkout/Checkout';
-import { CheckoutForm } from './components/Checkout/CheckoutForm';
-import { Order } from './components/Checkout/Order';
+import Order from './components/Order/Order';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -38,8 +37,7 @@ function App() {
           <Route exact path='/item/:id' element={<ItemDetailContainer />} />
           <Route exact path='/cart' element={<Cart/>} />
           <Route exact path='/checkout' element={<Checkout/>} />
-          <Route exact path='/checkout' element={<CheckoutForm/>} />
-          <Route exact path='/checkout' element={<Order/>} />
+          <Route exact path='/order' element={<Order/>} />
         </Routes>   
       </BrowserRouter>
     </CartProvider>

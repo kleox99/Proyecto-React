@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Notification } from './Notification/Notification';
 import {Icons} from './Icons/Icons'
-import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContex';
+import { StyledLink } from './NavBar/NavBarContainers';
 
 
 export const CartWidget = () => {
@@ -11,10 +11,10 @@ export const CartWidget = () => {
     const number = cartItems.length
 
     return (
-        <Link to={"/cart"}>
+        <StyledLink to={"/cart"}>
             <Notification number={number}>
                 <Icons type={"cart"}/>
             </Notification>
-        </Link>
+        </StyledLink>
     )
 }

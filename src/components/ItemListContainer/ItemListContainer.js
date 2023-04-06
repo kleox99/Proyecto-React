@@ -8,7 +8,6 @@ export const ItemListContainer = () => {
     const itemList = useItemList();
 
     const {id} = useParams()
-    console.log("🚀 ~ file: ItemListContainer.js:11 ~ ItemListContainer ~ id:", id)
 
     const groupByCategory = (items) => {
         return items.reduce((group, item) => {
@@ -23,7 +22,6 @@ export const ItemListContainer = () => {
     }
 
     const itemGroups = itemList ? groupByCategory(itemList) : {}
-    console.log("🚀 ~ file: ItemListContainer.js:25 ~ ItemListContainer ~ itemGroups:", itemGroups)
 
     const categoriesList = Object.entries(itemGroups);
 

@@ -15,10 +15,9 @@ export const Checkout = () => {
 
     return (
         <div>
-
             {cartItems.map(item => <CheckoutItem key={item.id} item={item}/>)}
             <span>Total: {total}<Coin/></span>
-            <CheckoutForm/>
+            <CheckoutForm order={cartItems}/>
         </div>
     )
 }

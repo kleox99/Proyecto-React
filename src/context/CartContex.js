@@ -7,7 +7,6 @@ export const CartProvider = ({children}) => {
 
     const addItemToCart = (item) => {
         const itemInCart = cartItems.find(element => element.id === item.id)
-        console.log("🚀 ~ file: CartContex.js:10 ~ addItemToCart ~ itemInCart:", itemInCart)
 
         if  (itemInCart) {
             itemInCart.quantity += item.quantity
